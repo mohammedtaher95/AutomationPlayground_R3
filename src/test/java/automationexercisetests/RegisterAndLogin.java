@@ -9,12 +9,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.Homepage;
 import pages.LoginPage;
+import pages.RegistrationPage;
 
 public class RegisterAndLogin {
 
     WebDriver driver;
     Homepage homepage;
     LoginPage loginPage;
+    RegistrationPage registrationPage;
 
     @BeforeClass
     public void setUp() {
@@ -27,19 +29,18 @@ public class RegisterAndLogin {
     public void registerNewUser() {
         homepage = new Homepage(driver);
         loginPage = new LoginPage(driver);
+        registrationPage = new RegistrationPage(driver);
 
         homepage.checkThatCarouselShouldBeDisplayed();
         homepage.clickOnLoginLink();
 
         loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
-        loginPage.fillSignUpForm("Mohammed", "test88767@test.com");
+        loginPage.fillSignUpForm("Mohammed", "testru87798767@test.com");
         loginPage.clickOnSignUpButton();
 
-
-        Assert.assertTrue(driver.getCurrentUrl().contains("/signup"));
-        Assert.assertEquals(driver.findElement(By.xpath("(//h2[@class=\"title text-center\"])[1]")).getText(), "ENTER ACCOUNT INFORMATION");
-
-
+        registrationPage.checkThatRegistrationPageShouldBeLoadedSuccessfully();
+        registrationPage.fillInRegistrationForm();
+        registrationPage.clickOnCreateAccountButton();
     }
 
 
