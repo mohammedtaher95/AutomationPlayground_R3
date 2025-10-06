@@ -36,8 +36,17 @@ public class LoginPage {
         driver.findElement(signUpEmailField).sendKeys(email);
     }
 
+    public void fillLoginForm(String email, String password) {
+        driver.findElement(loginEmailField).sendKeys(email);
+        driver.findElement(passwordField).sendKeys(password);
+    }
+
     public void clickOnSignUpButton() {
         driver.findElement(signUpButton).click();
+    }
+
+    public void clickOnLoginButton() {
+        driver.findElement(loginButton).click();
     }
 
 

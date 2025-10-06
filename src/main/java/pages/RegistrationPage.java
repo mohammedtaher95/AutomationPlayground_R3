@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class RegistrationPage {
@@ -13,6 +14,7 @@ public class RegistrationPage {
     By firstNameField = By.id("first_name");
     By lastNameField = By.id("last_name");
     By addressField = By.id("address1");
+    By countryField = By.id("country");
     By stateField = By.id("state");
     By cityField = By.id("city");
     By zipCode = By.id("zipcode");
@@ -37,6 +39,10 @@ public class RegistrationPage {
         driver.findElement(firstNameField).sendKeys("Mohammed");
         driver.findElement(lastNameField).sendKeys("Taher");
         driver.findElement(addressField).sendKeys("Alexandria");
+
+        Select countryDropdown = new Select(driver.findElement(countryField));
+        countryDropdown.selectByValue("Canada");
+
         driver.findElement(stateField).sendKeys("Alex");
         driver.findElement(cityField).sendKeys("Alexandria");
         driver.findElement(zipCode).sendKeys("34597");
