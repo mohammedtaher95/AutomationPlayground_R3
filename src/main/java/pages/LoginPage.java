@@ -16,6 +16,8 @@ public class LoginPage {
     By loginEmailField = By.xpath("//input[@data-qa=\"login-email\"]");
     By passwordField = By.name("password");
     By loginButton = By.xpath("//button[@data-qa=\"login-button\"]");
+    By incorrectCredentialsError = By.xpath("//p[contains(text(),\"Your email or password is incorrect!\")]");
+    //p[contains(text(), "")]
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -27,6 +29,10 @@ public class LoginPage {
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
         Assert.assertTrue(driver.findElement(signUpForm).isDisplayed());
         Assert.assertTrue(driver.findElement(loginForm).isDisplayed());
+    }
+
+    public void checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials() {
+        Assert.assertTrue(driver.findElement(incorrectCredentialsError).isDisplayed());
     }
 
     /********************************* Actions ************************************/
