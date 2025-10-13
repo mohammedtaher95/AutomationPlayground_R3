@@ -17,14 +17,16 @@ public class AccountCreationSuccessPage {
 
     /*********************************** Assertions ***********************************/
 
-    public void checkThatUserShouldBeNavigatedToCreationSuccessPage() {
+    public AccountCreationSuccessPage checkThatUserShouldBeNavigatedToCreationSuccessPage() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/account_created"));
         Assert.assertEquals(driver.findElement(successMessage).getText(), "ACCOUNT CREATED!");
+        return this;
     }
 
     /*********************************** Actions ************************************/
 
-    public void clickOnContinueButton() {
+    public Homepage clickOnContinueButton() {
         driver.findElement(continueButton).click();
+        return new Homepage(driver);
     }
 }

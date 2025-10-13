@@ -25,34 +25,40 @@ public class LoginPage {
 
     /********************************** Assertions *********************************/
 
-    public void checkThatUserShouldBeNavigatedToLoginSignUpPage() {
+    public LoginPage checkThatUserShouldBeNavigatedToLoginSignUpPage() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
         Assert.assertTrue(driver.findElement(signUpForm).isDisplayed());
         Assert.assertTrue(driver.findElement(loginForm).isDisplayed());
+        return this;
     }
 
-    public void checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials() {
+    public LoginPage checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials() {
         Assert.assertTrue(driver.findElement(incorrectCredentialsError).isDisplayed());
+        return this;
     }
 
     /********************************* Actions ************************************/
 
-    public void fillSignUpForm(String name, String email) {
+    public LoginPage fillSignUpForm(String name, String email) {
         driver.findElement(nameField).sendKeys(name);
         driver.findElement(signUpEmailField).sendKeys(email);
+        return this;
     }
 
-    public void fillLoginForm(String email, String password) {
+    public LoginPage fillLoginForm(String email, String password) {
         driver.findElement(loginEmailField).sendKeys(email);
         driver.findElement(passwordField).sendKeys(password);
+        return this;
     }
 
-    public void clickOnSignUpButton() {
+    public RegistrationPage clickOnSignUpButton() {
         driver.findElement(signUpButton).click();
+        return new RegistrationPage(driver);
     }
 
-    public void clickOnLoginButton() {
+    public LoginPage clickOnLoginButton() {
         driver.findElement(loginButton).click();
+        return this;
     }
 
 

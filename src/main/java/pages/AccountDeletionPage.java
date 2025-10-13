@@ -17,14 +17,16 @@ public class AccountDeletionPage {
 
     /*********************************** Assertions ***********************************/
 
-    public void checkThatUserShouldBeNavigatedToAccountDeletionPage() {
+    public AccountDeletionPage checkThatUserShouldBeNavigatedToAccountDeletionPage() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/delete_account"));
         Assert.assertEquals(driver.findElement(successMessage).getText(), "ACCOUNT DELETED!");
+        return this;
     }
 
     /*********************************** Actions ************************************/
 
-    public void clickOnContinueButton() {
+    public Homepage clickOnContinueButton() {
         driver.findElement(continueButton).click();
+        return new Homepage(driver);
     }
 }

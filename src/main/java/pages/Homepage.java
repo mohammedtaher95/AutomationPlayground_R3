@@ -11,6 +11,7 @@ public class Homepage {
     By loginLink = By.xpath("//a[@href=\"/login\"]");
     By logoutLink = By.xpath("//a[@href=\"/logout\"]");
     By deleteAccountLink = By.xpath("//a[@href=\"/delete_account\"]");
+    By contactUsLink = By.xpath("//a[@href=\"/contact_us\"]");
     By carousel = By.xpath("(//div[@class=\"carousel-inner\"])[1]");
 
     public Homepage(WebDriver driver) {
@@ -19,31 +20,42 @@ public class Homepage {
 
     /******************************* Assertions ***********************************/
 
-    public void checkThatCarouselShouldBeDisplayed() {
+    public Homepage checkThatCarouselShouldBeDisplayed() {
         Assert.assertTrue(driver.findElement(carousel).isDisplayed());
+        return this;
     }
 
-    public void checkThatUserShouldBeLoggedIn() {
+    public Homepage checkThatUserShouldBeLoggedIn() {
         Assert.assertTrue(driver.findElement(logoutLink).isDisplayed());
         Assert.assertTrue(driver.findElement(deleteAccountLink).isDisplayed());
+        return this;
     }
 
-    public void checkThatUserShouldBeLoggedOut() {
+    public Homepage checkThatUserShouldBeLoggedOut() {
         Assert.assertTrue(driver.findElement(loginLink).isDisplayed());
+        return this;
     }
 
     /******************************** Actions ***********************************/
 
-    public void clickOnLoginLink() {
+    public LoginPage clickOnLoginLink() {
         driver.findElement(loginLink).click();
+        return new LoginPage(driver);
     }
 
-    public void clickOnLogoutLink() {
+    public LoginPage clickOnLogoutLink() {
         driver.findElement(logoutLink).click();
+        return new LoginPage(driver);
     }
 
-    public void clickOnDeleteAccountLink() {
+    public AccountDeletionPage clickOnDeleteAccountLink() {
         driver.findElement(deleteAccountLink).click();
+        return new AccountDeletionPage(driver);
+    }
+
+    public ContactUsPage clickOnContactUsLink() {
+        driver.findElement(contactUsLink).click();
+        return new ContactUsPage(driver);
     }
 
 }

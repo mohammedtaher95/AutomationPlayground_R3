@@ -27,14 +27,15 @@ public class RegistrationPage {
 
     /************************************ Assertions ************************************/
 
-    public void checkThatRegistrationPageShouldBeLoadedSuccessfully() {
+    public RegistrationPage checkThatRegistrationPageShouldBeLoadedSuccessfully() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/signup"));
         Assert.assertEquals(driver.findElement(header).getText(), "ENTER ACCOUNT INFORMATION");
+        return this;
     }
 
     /*********************************** Actions **************************************/
 
-    public void fillInRegistrationForm() {
+    public RegistrationPage fillInRegistrationForm() {
         driver.findElement(passwordField).sendKeys("12345678");
         driver.findElement(firstNameField).sendKeys("Mohammed");
         driver.findElement(lastNameField).sendKeys("Taher");
@@ -47,9 +48,11 @@ public class RegistrationPage {
         driver.findElement(cityField).sendKeys("Alexandria");
         driver.findElement(zipCode).sendKeys("34597");
         driver.findElement(mobileNumber).sendKeys("01234567893");
+        return this;
     }
 
-    public void clickOnCreateAccountButton() {
+    public AccountCreationSuccessPage clickOnCreateAccountButton() {
         driver.findElement(createAccountButton).click();
+        return new AccountCreationSuccessPage(driver);
     }
 }

@@ -20,19 +20,26 @@ public class LoginTestCases {
         driver.manage().window().maximize();
         driver.navigate().to("https://automationexercise.com/");
 
-        homepage = new Homepage(driver);
-        loginPage = new LoginPage(driver);
+//        homepage = new Homepage(driver);
+//        loginPage = new LoginPage(driver);
     }
 
 
     @Test
     public void loginWithInvalidCredentials() {
-        homepage.checkThatCarouselShouldBeDisplayed();
-        homepage.clickOnLoginLink();
-        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
-        loginPage.fillLoginForm("fghjk@tex.com", "12345678");
-        loginPage.clickOnLoginButton();
-        loginPage.checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials();
+        new Homepage(driver).checkThatCarouselShouldBeDisplayed()
+                .clickOnLoginLink()
+                .checkThatUserShouldBeNavigatedToLoginSignUpPage()
+                .fillLoginForm("fghjk@tex.com", "12345678")
+                .clickOnLoginButton()
+                .checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials();
+
+//        homepage.checkThatCarouselShouldBeDisplayed();
+//        homepage.clickOnLoginLink().
+//        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
+//        loginPage.fillLoginForm("fghjk@tex.com", "12345678");
+//        loginPage.clickOnLoginButton();
+//        loginPage.checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials();
     }
 
 

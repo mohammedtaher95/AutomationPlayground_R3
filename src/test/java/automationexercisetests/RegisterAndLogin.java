@@ -32,27 +32,41 @@ public class RegisterAndLogin {
     @Test(priority = 1)
     public void registerNewUser() {
 
-        homepage.checkThatCarouselShouldBeDisplayed();
-        homepage.clickOnLoginLink();
+        new Homepage(driver).checkThatCarouselShouldBeDisplayed()
+                .clickOnLoginLink()
+                .checkThatUserShouldBeNavigatedToLoginSignUpPage()
+                .fillSignUpForm("Mohammed", "testr8t5r791767@test.com")
+                .clickOnSignUpButton().checkThatRegistrationPageShouldBeLoadedSuccessfully()
+                .fillInRegistrationForm()
+                .clickOnCreateAccountButton()
+                .checkThatUserShouldBeNavigatedToCreationSuccessPage();
 
-        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
-        loginPage.fillSignUpForm("Mohammed", "testr8t5r791767@test.com");
-        loginPage.clickOnSignUpButton();
-
-        registrationPage.checkThatRegistrationPageShouldBeLoadedSuccessfully();
-        registrationPage.fillInRegistrationForm();
-        registrationPage.clickOnCreateAccountButton();
-
-        successPage.checkThatUserShouldBeNavigatedToCreationSuccessPage();
+//        homepage.checkThatCarouselShouldBeDisplayed();
+//        homepage.clickOnLoginLink();
+//
+//        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
+//        loginPage.fillSignUpForm("Mohammed", "testr8t5r791767@test.com");
+//        loginPage.clickOnSignUpButton();
+//
+//        registrationPage.checkThatRegistrationPageShouldBeLoadedSuccessfully();
+//        registrationPage.fillInRegistrationForm();
+//        registrationPage.clickOnCreateAccountButton();
+//
+//        successPage.checkThatUserShouldBeNavigatedToCreationSuccessPage();
     }
 
     @Test(priority = 2, dependsOnMethods = {"registerNewUser"})
     public void userCanLogoutSuccessfully() {
-        successPage.clickOnContinueButton();
-        homepage.checkThatCarouselShouldBeDisplayed();
-        homepage.checkThatUserShouldBeLoggedIn();
-        homepage.clickOnLogoutLink();
-        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
+        new AccountCreationSuccessPage(driver).clickOnContinueButton()
+                .checkThatCarouselShouldBeDisplayed()
+                .checkThatUserShouldBeLoggedIn()
+                .clickOnLogoutLink().checkThatUserShouldBeNavigatedToLoginSignUpPage();
+
+//        successPage.clickOnContinueButton();
+//        homepage.checkThatCarouselShouldBeDisplayed();
+//        homepage.checkThatUserShouldBeLoggedIn();
+//        homepage.clickOnLogoutLink();
+//        loginPage.checkThatUserShouldBeNavigatedToLoginSignUpPage();
     }
 
     @Test(priority = 3, dependsOnMethods = {"userCanLogoutSuccessfully"})
