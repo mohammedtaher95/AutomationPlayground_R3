@@ -4,12 +4,25 @@ import browseractions.BrowserActions;
 import elementactions.ElementActions;
 import org.openqa.selenium.WebDriver;
 
+import static utilities.PropertiesManager.frameworkConfig;
+import static utilities.PropertiesManager.initializeProperties;
+
 public class Driver {
 
     private WebDriver driver;
 
-    public Driver(String driverType){
+    public Driver(){
+        initializeProperties();
+        String driverType = frameworkConfig.getProperty("BrowserType");
         driver = getDriverFactory(driverType).startDriver();
+
+        System.out.println("Starting the execution via " + driverType + " driver");
+        driver.manage().window().maximize();
+
+        if(!frameworkConfig.getProperty("BaseUrl").isEmpty()) {
+            driver.navigate().to(frameworkConfig.getProperty("BaseUrl"));
+        }
+
     }
 
     private DriverAbstract getDriverFactory(String driverType) {

@@ -1,12 +1,13 @@
 package pages;
 
+import driverfactory.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class LoginPage {
 
-    private WebDriver driver;
+    private Driver driver;
 
     By signUpForm = By.cssSelector("div.signup-form");
     By nameField = By.name("name");
@@ -19,45 +20,45 @@ public class LoginPage {
     By incorrectCredentialsError = By.xpath("//p[contains(text(),\"Your email or password is incorrect!\")]");
     //p[contains(text(), "")]
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage(Driver driver) {
         this.driver = driver;
     }
 
     /********************************** Assertions *********************************/
 
     public LoginPage checkThatUserShouldBeNavigatedToLoginSignUpPage() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("/login"));
-        Assert.assertTrue(driver.findElement(signUpForm).isDisplayed());
-        Assert.assertTrue(driver.findElement(loginForm).isDisplayed());
+        Assert.assertTrue(driver.get().getCurrentUrl().contains("/login"));
+        Assert.assertTrue(driver.element().isDisplayed(signUpForm));
+        Assert.assertTrue(driver.element().isDisplayed(loginForm));
         return this;
     }
 
     public LoginPage checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials() {
-        Assert.assertTrue(driver.findElement(incorrectCredentialsError).isDisplayed());
+        Assert.assertTrue(driver.element().isDisplayed(incorrectCredentialsError));
         return this;
     }
 
     /********************************* Actions ************************************/
 
     public LoginPage fillSignUpForm(String name, String email) {
-        driver.findElement(nameField).sendKeys(name);
-        driver.findElement(signUpEmailField).sendKeys(email);
+        driver.element().fillField(nameField, name);
+        driver.element().fillField(signUpEmailField, email);
         return this;
     }
 
     public LoginPage fillLoginForm(String email, String password) {
-        driver.findElement(loginEmailField).sendKeys(email);
-        driver.findElement(passwordField).sendKeys(password);
+        driver.element().fillField(loginEmailField, email);
+        driver.element().fillField(passwordField, password);
         return this;
     }
 
     public RegistrationPage clickOnSignUpButton() {
-        driver.findElement(signUpButton).click();
+        driver.element().click(signUpButton);
         return new RegistrationPage(driver);
     }
 
     public LoginPage clickOnLoginButton() {
-        driver.findElement(loginButton).click();
+        driver.element().click(loginButton);
         return this;
     }
 

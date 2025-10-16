@@ -1,32 +1,33 @@
 package pages;
 
+import driverfactory.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class AccountCreationSuccessPage {
 
-    private WebDriver driver;
+    private Driver driver;
 
     By successMessage = By.xpath("//h2[@data-qa=\"account-created\"]");
     By continueButton = By.xpath("//a[@data-qa=\"continue-button\"]");
 
-    public AccountCreationSuccessPage(WebDriver driver) {
+    public AccountCreationSuccessPage(Driver driver) {
         this.driver = driver;
     }
 
     /*********************************** Assertions ***********************************/
 
     public AccountCreationSuccessPage checkThatUserShouldBeNavigatedToCreationSuccessPage() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("/account_created"));
-        Assert.assertEquals(driver.findElement(successMessage).getText(), "ACCOUNT CREATED!");
+        Assert.assertTrue(driver.get().getCurrentUrl().contains("/account_created"));
+        Assert.assertEquals(driver.element().getTextOf(successMessage), "ACCOUNT CREATED!");
         return this;
     }
 
     /*********************************** Actions ************************************/
 
     public Homepage clickOnContinueButton() {
-        driver.findElement(continueButton).click();
+        driver.element().click(continueButton);
         return new Homepage(driver);
     }
 }

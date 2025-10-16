@@ -1,5 +1,6 @@
 package automationexercisetests;
 
+import driverfactory.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -9,7 +10,7 @@ import pages.*;
 
 public class RegisterAndLogin {
 
-    WebDriver driver;
+    Driver driver;
     Homepage homepage;
     LoginPage loginPage;
     RegistrationPage registrationPage;
@@ -18,9 +19,7 @@ public class RegisterAndLogin {
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.navigate().to("https://automationexercise.com/");
+        driver = new Driver();
 
         homepage = new Homepage(driver);
         loginPage = new LoginPage(driver);

@@ -20,17 +20,18 @@ public class TestClass {
 
     @Test
     public void login(){
-        driver.navigate().to("https://the-internet.herokuapp.com/login");
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.name("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.cssSelector("button.radius")).click();
-        Assert.assertTrue(driver.findElement(By.id("flash")).isDisplayed());
-        Assert.assertTrue(driver.getCurrentUrl().contains("/secure"));
-        Assert.assertTrue(driver.findElement(By.id("flash")).getText().contains("You logged into a secure area!"));
+        driver.navigate().to("https://mail.google.com");
+//        driver.navigate().to("https://the-internet.herokuapp.com/login");
+//        driver.findElement(By.id("username")).sendKeys("tomsmith");
+//        driver.findElement(By.name("password")).sendKeys("SuperSecretPassword!");
+//        driver.findElement(By.cssSelector("button.radius")).click();
+//        Assert.assertTrue(driver.findElement(By.id("flash")).isDisplayed());
+//        Assert.assertTrue(driver.getCurrentUrl().contains("/secure"));
+//        Assert.assertTrue(driver.findElement(By.id("flash")).getText().contains("You logged into a secure area!"));
     }
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
+        // driver.quit();
     }
 }

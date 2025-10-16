@@ -16,12 +16,12 @@ public class FactoryTest {
     @BeforeClass
     public void setUp() {
         //driver = new ChromeDriver();
-        driver = new Driver("FIREFX");
+        driver = new Driver();
     }
 
     @Test
     public void login(){
-        driver.browser().navigateTo("https://the-internet.herokuapp.com/login");
+        // driver.browser().navigateTo("https://the-internet.herokuapp.com/login");
 
         driver.element().fillField(By.id("username"), "tomsmith");
         driver.element().fillField(By.name("password"), "SuperSecretPassword!");

@@ -53,9 +53,9 @@ public class ContactUsPage {
         return this;
     }
 
-    public Homepage clickOnHomeButton() {
-        driver.findElement(homeButton).click();
-        return new Homepage(driver);
-    }
+//    public Homepage clickOnHomeButton() {
+//        driver.findElement(homeButton).click();
+//        return new Homepage(driver);
+//    }
 
 }

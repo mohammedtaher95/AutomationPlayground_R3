@@ -1,6 +1,8 @@
 package browseractions;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class BrowserActions {
 
@@ -30,6 +32,39 @@ public class BrowserActions {
     public BrowserActions refreshPage() {
         System.out.println("Refreshing Page.....");
         driver.navigate().refresh();
+        return this;
+    }
+
+    public BrowserActions scrollToBottom() {
+        new Actions(driver).scrollByAmount(0, 2500).build().perform();
+        return this;
+    }
+
+    public BrowserActions scrollToAmount(int width, int height) {
+        new Actions(driver).scrollByAmount(width, height).build().perform();
+        return this;
+    }
+
+    /****************************************** Cookies ****************************************/
+
+    public BrowserActions addCookie(Cookie cookie) {
+        driver.manage().addCookie(cookie);
+        return this;
+    }
+
+
+    public BrowserActions deleteCookie(Cookie cookie) {
+        driver.manage().deleteCookie(cookie);
+        return this;
+    }
+
+    public BrowserActions deleteCookieWithName(String name) {
+        driver.manage().deleteCookieNamed(name);
+        return this;
+    }
+
+    public BrowserActions deleteAllCookies() {
+        driver.manage().deleteAllCookies();
         return this;
     }
 }
