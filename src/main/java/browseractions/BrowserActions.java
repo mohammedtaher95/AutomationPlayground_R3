@@ -12,7 +12,7 @@ public class BrowserActions {
         this.driver = driver;
     }
 
-    public BrowserActions get(String url) {
+    public BrowserActions getToURL(String url) {
         System.out.println("Get to: " + url);
         driver.get(url);
         return this;

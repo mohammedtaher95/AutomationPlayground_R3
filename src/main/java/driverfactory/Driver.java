@@ -12,7 +12,6 @@ public class Driver {
     private WebDriver driver;
 
     public Driver(){
-        initializeProperties();
         String driverType = frameworkConfig.getProperty("BrowserType");
         driver = getDriverFactory(driverType).startDriver();
 
