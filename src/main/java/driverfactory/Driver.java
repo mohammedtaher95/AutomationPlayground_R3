@@ -2,7 +2,9 @@ package driverfactory;
 
 import browseractions.BrowserActions;
 import elementactions.ElementActions;
+import listeners.webdriver.DriverListener;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringDecorator;
 
 import static utilities.PropertiesManager.frameworkConfig;
 import static utilities.PropertiesManager.initializeProperties;
@@ -13,7 +15,8 @@ public class Driver {
 
     public Driver(){
         String driverType = frameworkConfig.getProperty("BrowserType");
-        driver = getDriverFactory(driverType).startDriver();
+        WebDriver undecoratedDriver = getDriverFactory(driverType).startDriver();
+        driver = new EventFiringDecorator<>(WebDriver.class, new DriverListener(undecoratedDriver)).decorate(undecoratedDriver);
 
         System.out.println("Starting the execution via " + driverType + " driver");
         driver.manage().window().maximize();

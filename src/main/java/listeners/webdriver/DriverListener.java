@@ -140,16 +140,16 @@ public class DriverListener implements WebDriverListener {
         }
     }
 
-    @Override
-    public void beforeSendKeys(WebElement element, CharSequence... keysToSend) {
-        StringBuilder stringBuilder = new StringBuilder();
-        Arrays.stream(keysToSend).toList().forEach(stringBuilder::append);
-        try {
-            System.out.println("Type \"" + keysToSend + "\" into " + getElementName(element) + ".");
-        } catch (Exception throwable) {
-            System.out.println("Type \"" + keysToSend + "\".");
-        }
-    }
+//    @Override
+//    public void beforeSendKeys(WebElement element, CharSequence... keysToSend) {
+//        StringBuilder stringBuilder = new StringBuilder();
+//        Arrays.stream(keysToSend).toList().forEach(stringBuilder::append);
+//        try {
+//            System.out.println("Type \"" + keysToSend + "\" into " + getElementName(element) + ".");
+//        } catch (Exception throwable) {
+//            System.out.println("Type \"" + keysToSend + "\".");
+//        }
+//    }
 
     @Override
     public void beforeClear(WebElement element) {
