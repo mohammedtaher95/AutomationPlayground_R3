@@ -1,7 +1,11 @@
 package elementactions;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class ElementActions {
 
@@ -82,4 +86,23 @@ public class ElementActions {
         System.out.println("Checking" + locator.toString().split(":", 2)[1] + " if Clickable");
         return driver.findElement(locator).isEnabled();
     }
+
+    public ElementActions waitForVisibility(By locator, Duration duration) {
+        System.out.println("Wait " + duration.toString() + " for " + locator.toString() + " To be visible");
+        new WebDriverWait(driver, duration).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return this;
+    }
+
+    public ElementActions waitForInvisibility(By locator, Duration duration) {
+        System.out.println("Wait " + duration.toString() + " for " + locator.toString() + " To be invisible");
+        new WebDriverWait(driver, duration).until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        return this;
+    }
+
+    public ElementActions waitForElementToBeClickable(By locator, Duration duration) {
+        System.out.println("Wait " + duration.toString() + " for " + locator.toString() + " To be clickable");
+        new WebDriverWait(driver, duration).until(ExpectedConditions.elementToBeClickable(locator));
+        return this;
+    }
+
 }

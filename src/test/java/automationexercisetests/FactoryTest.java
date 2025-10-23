@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import utilities.ScreenshotManager;
 
+import java.time.Duration;
+
 public class FactoryTest {
 
     //WebDriver driver;
@@ -24,10 +26,10 @@ public class FactoryTest {
 
     @Test
     public void login(){
-        // driver.browser().navigateTo("https://the-internet.herokuapp.com/login");
+        driver.browser().navigateTo("https://the-internet.herokuapp.com/login");
 
         driver.element().fillField(By.id("username"), "tomsmith");
-        driver.element().fillField(By.name("password"), "SuperSecretPassword");
+        driver.element().fillField(By.name("password"), "SuperSecretPassword!");
         driver.element().click(By.cssSelector("button.radius"));
 
 

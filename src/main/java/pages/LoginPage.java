@@ -2,12 +2,19 @@ package pages;
 
 import driverfactory.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class LoginPage {
 
     private Driver driver;
+    private WebDriverWait wait;
 
     By signUpForm = By.cssSelector("div.signup-form");
     By nameField = By.name("name");
@@ -22,6 +29,7 @@ public class LoginPage {
 
     public LoginPage(Driver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(this.driver.get(), Duration.ofSeconds(20));
     }
 
     /********************************** Assertions *********************************/
@@ -34,6 +42,16 @@ public class LoginPage {
     }
 
     public LoginPage checkThatErrorShouldBeDisplayedWhenEnteringWrongCredentials() {
+//        WebDriverWait explicitWait = new WebDriverWait(driver.get(), Duration.ofSeconds(20));
+//        explicitWait.until(ExpectedConditions.visibilityOfElementLocated(incorrectCredentialsError));
+//
+//        FluentWait wait = new FluentWait<>(driver.get()).withTimeout(Duration.ofSeconds(15))
+//                .pollingEvery(Duration.ofSeconds(2))
+//                .ignoring(NoSuchElementException.class);
+//
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(incorrectCredentialsError));
+
+        driver.element().waitForVisibility(incorrectCredentialsError, Duration.ofSeconds(10));
         Assert.assertTrue(driver.element().isDisplayed(incorrectCredentialsError));
         return this;
     }

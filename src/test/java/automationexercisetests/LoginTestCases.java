@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 import pages.Homepage;
 import pages.LoginPage;
 
+import java.time.Duration;
+
 public class LoginTestCases {
 
     Driver driver;
@@ -18,6 +20,7 @@ public class LoginTestCases {
     @BeforeClass
     public void setUp() {
         driver = new Driver();
+        // driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 //        driver.manage().window().maximize();
 //        driver.navigate().to("https://automationexercise.com/");
 
