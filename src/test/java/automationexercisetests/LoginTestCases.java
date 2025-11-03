@@ -3,9 +3,7 @@ package automationexercisetests;
 import driverfactory.Driver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.Homepage;
 import pages.LoginPage;
 
@@ -13,25 +11,19 @@ import java.time.Duration;
 
 public class LoginTestCases {
 
-    Driver driver;
-    Homepage homepage;
-    LoginPage loginPage;
+    public ThreadLocal<Driver> driver;
 
     @BeforeClass
-    public void setUp() {
-        driver = new Driver();
-        // driver.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-//        driver.manage().window().maximize();
-//        driver.navigate().to("https://automationexercise.com/");
-
-//        homepage = new Homepage(driver);
-//        loginPage = new LoginPage(driver);
+    @Parameters(value = "browserName")
+    public void setUp(@Optional("CHROME") String driverType) {
+        driver = new ThreadLocal<>();
+        driver.set(new Driver(driverType));
     }
 
 
     @Test
     public void loginWithInvalidCredentials() {
-        new Homepage(driver).checkThatCarouselShouldBeDisplayed()
+        new Homepage(driver.get()).checkThatCarouselShouldBeDisplayed()
                 .clickOnLoginLink()
                 .checkThatUserShouldBeNavigatedToLoginSignUpPage()
                 .fillLoginForm("fghjk@tex.com", "12345678")
@@ -49,6 +41,6 @@ public class LoginTestCases {
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
+        driver.get().quit();
     }
 }

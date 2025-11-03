@@ -18,7 +18,7 @@ public class Homepage {
     By carousel = By.xpath("(//div[@class=\"carousel-inner\"])[1]");
     By subscriptionSection = By.cssSelector("div.single-widget");
     By subscriptionEmailField = By.id("susbscribe_email");
-    By subscriptionButton = By.id("subscrib");
+    By subscriptionButton = By.id("subscribe");
     By subscriptionSuccessMessage = By.id("success-subscribe");
 
     public Homepage(Driver driver) {

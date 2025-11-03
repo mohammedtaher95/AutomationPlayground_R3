@@ -7,22 +7,41 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 
 import static utilities.PropertiesManager.frameworkConfig;
-import static utilities.PropertiesManager.initializeProperties;
 
 public class Driver {
 
-    private WebDriver driver;
+//    private WebDriver driver;
+    private ThreadLocal<WebDriver> driver;
 
     public Driver(){
         String driverType = frameworkConfig.getProperty("BrowserType");
         WebDriver undecoratedDriver = getDriverFactory(driverType).startDriver();
-        driver = new EventFiringDecorator<>(WebDriver.class, new DriverListener(undecoratedDriver)).decorate(undecoratedDriver);
+        assert undecoratedDriver != null;
+        driver = new ThreadLocal<>();
+        driver.set(new EventFiringDecorator<>(WebDriver.class,
+                new DriverListener(undecoratedDriver)).decorate(undecoratedDriver));
 
         System.out.println("Starting the execution via " + driverType + " driver");
-        driver.manage().window().maximize();
+        driver.get().manage().window().maximize();
 
         if(!frameworkConfig.getProperty("BaseUrl").isEmpty()) {
-            driver.navigate().to(frameworkConfig.getProperty("BaseUrl"));
+            driver.get().navigate().to(frameworkConfig.getProperty("BaseUrl"));
+        }
+
+    }
+
+    public Driver(String driverType){
+        WebDriver undecoratedDriver = getDriverFactory(driverType).startDriver();
+        assert undecoratedDriver != null;
+        driver = new ThreadLocal<>();
+        driver.set(new EventFiringDecorator<>(WebDriver.class,
+                new DriverListener(undecoratedDriver)).decorate(undecoratedDriver));
+
+        System.out.println("Starting the execution via " + driverType + " driver");
+        driver.get().manage().window().maximize();
+
+        if(!frameworkConfig.getProperty("BaseUrl").isEmpty()) {
+            driver.get().navigate().to(frameworkConfig.getProperty("BaseUrl"));
         }
 
     }
@@ -49,19 +68,19 @@ public class Driver {
     }
 
     public WebDriver get() {
-        return driver;
+        return driver.get();
     }
 
     public void quit() {
-        driver.quit();
+        driver.get().quit();
     }
 
     public ElementActions element() {
-        return new ElementActions(driver);
+        return new ElementActions(driver.get());
     }
 
     public BrowserActions browser() {
-        return new BrowserActions(driver);
+        return new BrowserActions(driver.get());
     }
 
 }

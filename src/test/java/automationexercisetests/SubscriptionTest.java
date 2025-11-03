@@ -1,23 +1,23 @@
 package automationexercisetests;
 
 import driverfactory.Driver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.Homepage;
 
 public class SubscriptionTest {
 
-    public Driver driver;
+    public ThreadLocal<Driver> driver;
 
     @BeforeClass
-    public void setUp() {
-        driver = new Driver();
+    @Parameters(value = "browserName")
+    public void setUp(@Optional("CHROME") String driverType) {
+        driver = new ThreadLocal<>();
+        driver.set(new Driver(driverType));
     }
 
     @Test
     public void userCanSubscribeSuccessfully() {
-        new Homepage(driver).checkThatCarouselShouldBeDisplayed()
+        new Homepage(driver.get()).checkThatCarouselShouldBeDisplayed()
                 .checkThatSubscriptionSectionShouldBeDisplayedSuccessfully()
                 .fillSubscriptionEmail("test3789@test.com")
                 .clickOnSubscribeButton()
@@ -26,6 +26,6 @@ public class SubscriptionTest {
 
     @AfterClass
     public void tearDown() {
-        driver.quit();
+        driver.get().quit();
     }
 }

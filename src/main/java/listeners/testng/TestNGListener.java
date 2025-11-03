@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.testng.IExecutionListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utilities.AllureReportManager;
 import utilities.ScreenshotManager;
 
 import java.io.File;
@@ -22,14 +23,18 @@ public class TestNGListener implements IExecutionListener, ITestListener {
         System.out.println("**************** Welcome to Selenium Framework *****************");
         initializeProperties();
         Allure.getLifecycle();
+        if(frameworkConfig.getProperty("cleanAllureReportBeforeExecution").equalsIgnoreCase("true")) {
+            AllureReportManager.cleanAllureReport();
+        }
     }
 
     @Override
     public void onExecutionFinish() {
         System.out.println("********************* End of Execution *********************");
-        System.out.println("Opening Allure Report");
+
         if(frameworkConfig.getProperty("openReportAfterExecution").equalsIgnoreCase("true")) {
             try {
+                System.out.println("Opening Allure Report.....");
                 Runtime.getRuntime().exec("generateReport.bat");
             } catch (IOException e) {
                 System.out.println("Unable to open the report " + e.getMessage());
